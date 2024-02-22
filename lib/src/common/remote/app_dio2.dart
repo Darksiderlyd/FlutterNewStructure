@@ -66,8 +66,8 @@ class Request {
             return data;
           }
         } catch (e) {
-          logger.e('解析响应数据异常1', error: e);
-          return Future.error('解析响应数据异常2');
+          logger.e('解析响应数据异常', error: e);
+          return Future.error('解析响应数据异常');
         }
       } else {
         logger.e('HTTP错误，状态码为：${response.statusCode}');
@@ -88,25 +88,25 @@ class Request {
   static String _dioError(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        return "网络连接超时，请检查网络设置";
+        return '网络连接超时，请检查网络设置';
         break;
       case DioExceptionType.receiveTimeout:
-        return "服务器异常，请稍后重试！";
+        return '服务器异常，请稍后重试！';
         break;
       case DioExceptionType.sendTimeout:
-        return "网络连接超时，请检查网络设置";
+        return '网络连接超时，请检查网络设置';
         break;
       case DioExceptionType.badResponse:
-        return "服务器异常，请稍后重试！";
+        return '服务器异常，请稍后重试！';
         break;
       case DioExceptionType.cancel:
-        return "请求已被取消，请重新请求";
+        return '请求已被取消，请重新请求';
         break;
       case DioExceptionType.unknown:
-        return "网络异常，请稍后重试！";
+        return '网络异常，请稍后重试！';
         break;
       default:
-        return "Dio异常";
+        return 'Dio异常';
     }
   }
 

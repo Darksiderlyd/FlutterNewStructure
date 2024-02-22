@@ -35,8 +35,8 @@ dependencies:
   mno_webview:
     path: ../../components/webview
 
-  flutter_fimber: ^0.6.5
-  fimber: ^0.6.6
+  flutter_fimber: ^0.7.1
+  fimber: ^0.7.0
   flutter_inappwebview: ^5.7.2+3
   path_provider: ^2.0.14
   universal_io: ^2.2.1

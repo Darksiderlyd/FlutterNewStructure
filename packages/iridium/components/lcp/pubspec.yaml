@@ -15,7 +15,7 @@ dependencies:
   dartx: ^1.1.0
   device_info_plus: ^9.0.1
   ffi: ^2.0.2
-  fimber: ^0.6.6
+  fimber: ^0.7.0
   flutter_archive: ^5.0.0
   mno_fsm: ^0.2.3
   multiple_localization: ^0.3.0
