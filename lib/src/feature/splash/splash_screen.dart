@@ -3,10 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:iridium_reader_widget/views/viewers/epub_screen.dart';
+
+// import 'package:iridium_reader_widget/views/viewers/epub_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:readbook/src/feature/splash/notifiers/file_notifier.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:vocsy_epub_viewer/epub_viewer.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -72,18 +74,46 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                       itemCount: data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return InkWell(
-                          onTap: (){
+                          onTap: () {
                             final path = data[index].path;
                             final bookFile = File(path);
                             if (bookFile.existsSync()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) {
-                                    return EpubScreen.fromPath(filePath: path);
-                                  },
-                                ),
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (_) {
+                              //       return EpubScreen.fromPath(filePath: path);
+                              //     },
+                              //   ),
+                              // );
+
+                              VocsyEpub.setConfig(
+                                themeColor: Theme.of(context).primaryColor,
+                                identifier: "iosBook",
+                                scrollDirection:
+                                    EpubScrollDirection.ALLDIRECTIONS,
+                                allowSharing: true,
+                                enableTts: true,
+                                nightMode: true,
                               );
+
+                              // get current locator
+                              VocsyEpub.locatorStream.listen((locator) {
+                                print('LOCATOR: $locator');
+                              });
+
+                              VocsyEpub.open(
+                                path,
+                                lastLocation: EpubLocator.fromJson({
+                                  "bookId": "2239",
+                                  "href": "/OEBPS/ch06.xhtml",
+                                  "created": 1539934158390,
+                                  "locations": {
+                                    "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+                                  }
+                                }),
+                              );
+
                             }
                           },
                           child: Padding(
